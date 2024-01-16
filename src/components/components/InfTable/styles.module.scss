@@ -1,0 +1,27 @@
+h1 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto;
+  font-family: sans-serif;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 5px;
+  background: #ece9e0;
+  color: #656665;
+  border: 16px solid #ece9e0;
+  border-radius: 20px;
+}
+
+th {
+  font-size: 18px;
+  padding: 10px;
+}
+
+td {
+  background: #f5d7df;
+  padding: 10px;
+}
