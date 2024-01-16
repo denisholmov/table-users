@@ -10,7 +10,7 @@ export const fetchUsers = createAsyncThunk(
 );
 
 const initialState = {
-  entireListUsers: [],
+  entireListUsers: {},
 };
 
 export const usersInfTableSlice = createSlice({

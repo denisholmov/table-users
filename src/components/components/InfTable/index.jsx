@@ -1,4 +1,5 @@
 import React from "react";
+import { RowTableUser } from "./RowTableUser";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -20,6 +21,8 @@ export const InfTable = () => {
     console.log(entireListUsers);
   }, [entireListUsers]); // в консоли вывел пользователей
 
+  const arrUsers = entireListUsers.users;
+
   return (
     <table>
       <tr>
@@ -30,14 +33,11 @@ export const InfTable = () => {
         <th>Город</th>
         <th>Улица</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
-      </tr>
+      {/* key={entireListUsers.id} */}
+      {arrUsers.map((person) => (
+        <RowTableUser key={person.id} person={person} />
+      ))}
+      {/* <RowTableUser user={arrUsers} /> */}
     </table>
   );
 };
