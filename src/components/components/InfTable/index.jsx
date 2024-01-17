@@ -7,6 +7,7 @@ import {
   setEntireListUsers,
   setSearchTermAllCharacteristic,
   setFilterUsers,
+  setSortAge,
 } from "../../../redux/slices/usersInfTableSlice";
 import { usersSelector } from "../../../redux/slices/usersInfTableSlice";
 
@@ -14,8 +15,10 @@ import styles from "./styles.module.scss";
 
 export const InfTable = () => {
   const dispatch = useDispatch();
-  const { entireListUsers, searchTermAllCharacteristic, filterUsers } =
+  const { entireListUsers, searchTermAllCharacteristic, filterUsers, sortAge } =
     useSelector(usersSelector);
+
+  const [people, setPeople] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +33,18 @@ export const InfTable = () => {
 
     fetchData();
   }, []);
+
+  // Функция для сортировки по возрастанию
+  const sortAscendingAge = () => {
+    const sortedPeople = [...people].sort((a, b) => a.age - b.age);
+    setPeople(sortedPeople);
+  };
+
+  // Функция для сортировки по убыванию
+  const sortDescendingAge = () => {
+    const sortedPeople = [...people].sort((a, b) => b.age - a.age);
+    setPeople(sortedPeople);
+  };
 
   React.useEffect(() => {
     console.log(searchTermAllCharacteristic);
@@ -74,9 +89,7 @@ export const InfTable = () => {
         })
         .filter((item) => {
           if (searchTermAllCharacteristic.age) {
-            return String(item.age).includes(
-              String(searchTermAllCharacteristic.age)
-            );
+            return String(item.age) === String(searchTermAllCharacteristic.age);
           }
           return true;
         })
@@ -104,6 +117,7 @@ export const InfTable = () => {
           }
           return true;
         });
+
       dispatch(setFilterUsers(filteredItems));
     }
   }, [searchTermAllCharacteristic, entireListUsers]);

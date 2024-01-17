@@ -13,6 +13,7 @@ const initialState = {
   entireListUsers: [],
   filterUsers: [],
   searchTermAllCharacteristic: {},
+  sortAge: "",
 };
 
 export const usersInfTableSlice = createSlice({
@@ -27,6 +28,9 @@ export const usersInfTableSlice = createSlice({
     },
     setSearchTermAllCharacteristic: (state, action) => {
       state.searchTermAllCharacteristic = action.payload; // сюда сохраняем информацию с поиском пользователя
+    },
+    setSortAge: (state, action) => {
+      state.sortAge = action.payload; // сюда сохраняем информацию с поиском пользователя
     },
   },
 
@@ -43,6 +47,7 @@ export const {
   setEntireListUsers,
   setFilterUsers,
   setSearchTermAllCharacteristic,
+  setSortAge,
 } = usersInfTableSlice.actions;
 
 export default usersInfTableSlice.reducer;
