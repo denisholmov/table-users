@@ -122,6 +122,7 @@ export const SearchTable = () => {
           onChange={handleChangeGender}
           className={`${styles.searchInput} ${styles.searchGender}`}
         >
+          <option value=""></option>
           <option value="male">male</option>
           <option value="female">female</option>
         </select>
