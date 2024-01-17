@@ -3,14 +3,19 @@ import { SearchTable } from "./RowTableUser/components/SearchTable";
 import { RowTableUser } from "./RowTableUser";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setEntireListUsers } from "../../../redux/slices/usersInfTableSlice";
+import {
+  setEntireListUsers,
+  setSearchTermAllCharacteristic,
+  setFilterUsers,
+} from "../../../redux/slices/usersInfTableSlice";
 import { usersSelector } from "../../../redux/slices/usersInfTableSlice";
 
 import styles from "./styles.module.scss";
 
 export const InfTable = () => {
   const dispatch = useDispatch();
-  const { entireListUsers } = useSelector(usersSelector);
+  const { entireListUsers, searchTermAllCharacteristic, filterUsers } =
+    useSelector(usersSelector);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +32,19 @@ export const InfTable = () => {
   }, []);
 
   React.useEffect(() => {
-    console.log(entireListUsers.users);
-  }, [entireListUsers]); // в консоли вывел пользователей
+    if (entireListUsers && entireListUsers.users) {
+      // Проверяем существуют ли данные
+      const filteredItems = entireListUsers.users.filter((item) => {
+        if (searchTermAllCharacteristic.firstName) {
+          return item.firstName
+            .toLowerCase()
+            .includes(searchTermAllCharacteristic.firstName.toLowerCase());
+        }
+        return true;
+      });
+      dispatch(setFilterUsers(filteredItems));
+    }
+  }, [searchTermAllCharacteristic, entireListUsers]);
 
   const arrUsers = entireListUsers.users;
 
@@ -46,9 +62,8 @@ export const InfTable = () => {
             <th>Улица</th>
           </tr>
 
-          {entireListUsers &&
-            entireListUsers.users &&
-            arrUsers.map((person) => (
+          {filterUsers &&
+            filterUsers.map((person) => (
               <RowTableUser key={person.id} person={person} />
             ))}
         </tbody>

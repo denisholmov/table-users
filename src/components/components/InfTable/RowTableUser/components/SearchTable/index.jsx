@@ -1,8 +1,19 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { usersSelector } from "../../../../../../redux/slices/usersInfTableSlice";
 
 import styles from "./styles.module.scss";
+import {
+  setEntireListUsers,
+  setFilterUsers,
+  setSearchTermAllCharacteristic,
+} from "../../../../../../redux/slices/usersInfTableSlice";
 
 export const SearchTable = () => {
+  const dispatch = useDispatch();
+  const { entireListUsers, filteredUsers, searchTermAllCharacteristic } =
+    useSelector(usersSelector);
+
   const [searchTermLastName, setSearchTermLastName] = React.useState("");
   const [searchTermFirstName, setSearchTermFirstName] = React.useState("");
   const [searchTermMaidenName, setSearchTermMaidenName] = React.useState("");
@@ -12,9 +23,6 @@ export const SearchTable = () => {
   const [searchTermPhone, setSearchTermPhone] = React.useState("");
   const [searchTermCity, setSearchTermCity] = React.useState("");
   const [searchTermStreet, setSearchTermStreet] = React.useState("");
-
-  const [searchTermAllCharacteristic, setSearchTermAllCharacteristic] =
-    React.useState({});
 
   const handleChangeLastName = (event) => {
     setSearchTermLastName(event.target.value);
@@ -51,16 +59,18 @@ export const SearchTable = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
 
-    setSearchTermAllCharacteristic({
-      searchTermLastName,
-      searchTermFirstName,
-      searchTermMaidenName,
-      searchTermAge,
-      searchTermGender,
-      searchTermPhone,
-      searchTermCity,
-      searchTermStreet,
-    });
+    dispatch(
+      setSearchTermAllCharacteristic({
+        lastName: searchTermLastName,
+        firstName: searchTermFirstName,
+        maidenName: searchTermMaidenName,
+        age: searchTermAge,
+        gender: searchTermGender,
+        phone: searchTermPhone,
+        city: searchTermCity,
+        address: searchTermStreet,
+      })
+    );
 
     setSearchTermLastName("");
     setSearchTermFirstName("");
@@ -70,28 +80,7 @@ export const SearchTable = () => {
     setSearchTermPhone("");
     setSearchTermCity("");
     setSearchTermStreet("");
-
-    //  // Отправка запроса
-    //  fetch("https://dummyjson.com/users/search", {
-    //    method: "POST",
-    //    body: JSON.stringify({ inputValue }),
-    //    headers: {
-    //      "Content-Type": "application/json",
-    //    },
-    //  })
-    //    .then((response) => response.json())
-    //    .then((data) => {
-    //      console.log(data);
-    //      // Действия после получения ответа
-    //    })
-    //    .catch((error) => {
-    //      console.error(error);
-    //    });
   };
-
-  React.useEffect(() => {
-    console.log(searchTermAllCharacteristic, "searchTermAllCharacteristic");
-  }, [searchTermAllCharacteristic]);
 
   return (
     <div className={styles.search}>

@@ -10,7 +10,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // );
 
 const initialState = {
-  entireListUsers: {},
+  entireListUsers: [],
+  filterUsers: [],
+  searchTermAllCharacteristic: {},
 };
 
 export const usersInfTableSlice = createSlice({
@@ -19,6 +21,12 @@ export const usersInfTableSlice = createSlice({
   reducers: {
     setEntireListUsers: (state, action) => {
       state.entireListUsers = action.payload; // сюда сохраняем весь список пользователей
+    },
+    setFilterUsers: (state, action) => {
+      state.filterUsers = action.payload; // сюда сохраняем весь список отфильтрованных пользователей
+    },
+    setSearchTermAllCharacteristic: (state, action) => {
+      state.searchTermAllCharacteristic = action.payload; // сюда сохраняем информацию с поиском пользователя
     },
   },
 
@@ -31,6 +39,10 @@ export const usersInfTableSlice = createSlice({
 
 export const usersSelector = (state) => state.usersTable;
 
-export const { setEntireListUsers } = usersInfTableSlice.actions;
+export const {
+  setEntireListUsers,
+  setFilterUsers,
+  setSearchTermAllCharacteristic,
+} = usersInfTableSlice.actions;
 
 export default usersInfTableSlice.reducer;
