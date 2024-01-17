@@ -47,6 +47,15 @@ export const InfTable = () => {
     dispatch(setFilterUsers(sortedPeople));
   };
 
+  const handleSortChange = (event) => {
+    const sortValue = event.target.value;
+    if (sortValue === "asc") {
+      sortAscendingAge();
+    } else if (sortValue === "des") {
+      sortDescendingAge();
+    }
+  };
+
   React.useEffect(() => {
     console.log(searchTermAllCharacteristic);
     if (entireListUsers && entireListUsers.users) {
@@ -123,8 +132,6 @@ export const InfTable = () => {
     }
   }, [searchTermAllCharacteristic, entireListUsers]);
 
-  const arrUsers = entireListUsers.users;
-
   return (
     <>
       <SearchTable />
@@ -145,7 +152,7 @@ export const InfTable = () => {
             ))}
         </tbody>
       </table>
-      <select className={styles.sortInput}>
+      <select className={styles.sortInput} onChange={handleSortChange}>
         <option value=""></option>
         <option value="asc">По возрастанию</option>
         <option value="des">По убыванию</option>
