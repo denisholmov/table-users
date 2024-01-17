@@ -95,6 +95,14 @@ export const InfTable = () => {
               .includes(searchTermAllCharacteristic.address.toLowerCase());
           }
           return true;
+        })
+        .filter((item) => {
+          if (searchTermAllCharacteristic.phone) {
+            return item.phone
+              .toLowerCase()
+              .includes(searchTermAllCharacteristic.phone.toLowerCase());
+          }
+          return true;
         });
       dispatch(setFilterUsers(filteredItems));
     }
