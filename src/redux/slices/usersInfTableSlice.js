@@ -14,6 +14,8 @@ const initialState = {
   filterUsers: [],
   searchTermAllCharacteristic: {},
   sortAge: "",
+  modalInfUser: false,
+  activeModalInfUser: {},
 };
 
 export const usersInfTableSlice = createSlice({
@@ -32,6 +34,12 @@ export const usersInfTableSlice = createSlice({
     setSortAge: (state, action) => {
       state.sortAge = action.payload; // сюда сохраняем информацию с поиском пользователя
     },
+    setModalInfUser: (state, action) => {
+      state.modalInfUser = action.payload; // сюда сохраняем информацию с поиском пользователя
+    },
+    setActiveModalInfUser: (state, action) => {
+      state.activeModalInfUser = action.payload; // сюда сохраняем информацию с поиском пользователя
+    },
   },
 
   //   extraReducers: (builder) => {
@@ -48,6 +56,8 @@ export const {
   setFilterUsers,
   setSearchTermAllCharacteristic,
   setSortAge,
+  setModalInfUser,
+  setActiveModalInfUser,
 } = usersInfTableSlice.actions;
 
 export default usersInfTableSlice.reducer;
