@@ -1,12 +1,10 @@
 import React from "react";
+import { SearchTable } from "./RowTableUser/components/SearchTable";
 import { RowTableUser } from "./RowTableUser";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setEntireListUsers } from "../../../redux/slices/usersInfTableSlice";
-import {
-  fetchUsers,
-  usersSelector,
-} from "../../../redux/slices/usersInfTableSlice";
+import { usersSelector } from "../../../redux/slices/usersInfTableSlice";
 
 import styles from "./styles.module.scss";
 
@@ -29,29 +27,32 @@ export const InfTable = () => {
   }, []);
 
   React.useEffect(() => {
-    console.log(entireListUsers);
+    console.log(entireListUsers.users);
   }, [entireListUsers]); // в консоли вывел пользователей
 
   const arrUsers = entireListUsers.users;
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>ФИО</th>
-          <th>Возраст</th>
-          <th>Пол</th>
-          <th>Номер телефона</th>
-          <th>Город</th>
-          <th>Улица</th>
-        </tr>
+    <>
+      <SearchTable />
+      <table>
+        <tbody>
+          <tr>
+            <th>ФИО</th>
+            <th>Возраст</th>
+            <th>Пол</th>
+            <th>Номер телефона</th>
+            <th>Город</th>
+            <th>Улица</th>
+          </tr>
 
-        {entireListUsers &&
-          entireListUsers.users &&
-          arrUsers.map((person) => (
-            <RowTableUser key={person.id} person={person} />
-          ))}
-      </tbody>
-    </table>
+          {entireListUsers &&
+            entireListUsers.users &&
+            arrUsers.map((person) => (
+              <RowTableUser key={person.id} person={person} />
+            ))}
+        </tbody>
+      </table>
+    </>
   );
 };
