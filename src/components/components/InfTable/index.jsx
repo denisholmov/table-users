@@ -2,6 +2,7 @@ import React from "react";
 import { RowTableUser } from "./RowTableUser";
 import { useSelector, useDispatch } from "react-redux";
 
+import { setEntireListUsers } from "../../../redux/slices/usersInfTableSlice";
 import {
   fetchUsers,
   usersSelector,
@@ -14,7 +15,17 @@ export const InfTable = () => {
   const { entireListUsers } = useSelector(usersSelector);
 
   React.useEffect(() => {
-    dispatch(fetchUsers());
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/users");
+        const json = await response.json();
+        dispatch(setEntireListUsers(json));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   React.useEffect(() => {
@@ -25,19 +36,22 @@ export const InfTable = () => {
 
   return (
     <table>
-      <tr>
-        <th>ФИО</th>
-        <th>Возраст</th>
-        <th>Пол</th>
-        <th>Номер телефона</th>
-        <th>Город</th>
-        <th>Улица</th>
-      </tr>
-      {/* key={entireListUsers.id} */}
-      {arrUsers.map((person) => (
-        <RowTableUser key={person.id} person={person} />
-      ))}
-      {/* <RowTableUser user={arrUsers} /> */}
+      <tbody>
+        <tr>
+          <th>ФИО</th>
+          <th>Возраст</th>
+          <th>Пол</th>
+          <th>Номер телефона</th>
+          <th>Город</th>
+          <th>Улица</th>
+        </tr>
+
+        {entireListUsers &&
+          entireListUsers.users &&
+          arrUsers.map((person) => (
+            <RowTableUser key={person.id} person={person} />
+          ))}
+      </tbody>
     </table>
   );
 };
