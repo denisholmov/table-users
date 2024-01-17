@@ -1,23 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { usersSelector } from "../../../../../../redux/slices/usersInfTableSlice";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles.module.scss";
-import {
-  setEntireListUsers,
-  setFilterUsers,
-  setSearchTermAllCharacteristic,
-  setSortAge,
-} from "../../../../../../redux/slices/usersInfTableSlice";
+import { setSearchTermAllCharacteristic } from "../../../../../../redux/slices/usersInfTableSlice";
 
 export const SearchTable = () => {
   const dispatch = useDispatch();
-  const {
-    entireListUsers,
-    filteredUsers,
-    searchTermAllCharacteristic,
-    sortAge,
-  } = useSelector(usersSelector);
 
   const [searchTermLastName, setSearchTermLastName] = React.useState("");
   const [searchTermFirstName, setSearchTermFirstName] = React.useState("");
@@ -61,10 +49,6 @@ export const SearchTable = () => {
     setSearchTermStreet(event.target.value);
   };
 
-  const handleSortAge = (event) => {
-    dispatch(setSortAge(event.target.value));
-  };
-
   const handleSearchSubmit = (event) => {
     event.preventDefault();
 
@@ -89,7 +73,6 @@ export const SearchTable = () => {
     setSearchTermPhone("");
     setSearchTermCity("");
     setSearchTermStreet("");
-    dispatch(setSortAge(""));
   };
 
   return (
@@ -160,16 +143,6 @@ export const SearchTable = () => {
           type="text"
           placeholder="Улица"
         />
-
-        <select
-          value={sortAge}
-          onChange={handleSortAge}
-          className={styles.sortInput}
-        >
-          <option value=""></option>
-          <option value="asc">По возрастанию</option>
-          <option value="des">По убыванию</option>
-        </select>
 
         <button className={styles.btn} type="submit">
           Поиск

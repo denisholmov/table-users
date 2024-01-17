@@ -37,14 +37,14 @@ export const InfTable = () => {
 
   // Функция для сортировки по возрастанию
   const sortAscendingAge = () => {
-    const sortedPeople = [...people].sort((a, b) => a.age - b.age);
-    setPeople(sortedPeople);
+    const sortedPeople = [...filterUsers].sort((a, b) => a.age - b.age);
+    dispatch(setFilterUsers(sortedPeople));
   };
 
   // Функция для сортировки по убыванию
   const sortDescendingAge = () => {
-    const sortedPeople = [...people].sort((a, b) => b.age - a.age);
-    setPeople(sortedPeople);
+    const sortedPeople = [...filterUsers].sort((a, b) => b.age - a.age);
+    dispatch(setFilterUsers(sortedPeople));
   };
 
   React.useEffect(() => {
@@ -145,6 +145,11 @@ export const InfTable = () => {
             ))}
         </tbody>
       </table>
+      <select className={styles.sortInput}>
+        <option value=""></option>
+        <option value="asc">По возрастанию</option>
+        <option value="des">По убыванию</option>
+      </select>
     </>
   );
 };
