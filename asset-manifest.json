@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/github.io/table-users/static/css/main.bc9aff30.css",
-    "main.js": "/github.io/table-users/static/js/main.e1925b4a.js",
-    "index.html": "/github.io/table-users/index.html",
-    "main.bc9aff30.css.map": "/github.io/table-users/static/css/main.bc9aff30.css.map",
-    "main.e1925b4a.js.map": "/github.io/table-users/static/js/main.e1925b4a.js.map"
+    "main.css": "/table-users/static/css/main.bc9aff30.css",
+    "main.js": "/table-users/static/js/main.e1925b4a.js",
+    "index.html": "/table-users/index.html",
+    "main.bc9aff30.css.map": "/table-users/static/css/main.bc9aff30.css.map",
+    "main.e1925b4a.js.map": "/table-users/static/js/main.e1925b4a.js.map"
   },
   "entrypoints": [
     "static/css/main.bc9aff30.css",
